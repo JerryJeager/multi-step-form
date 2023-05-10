@@ -50,9 +50,9 @@ const Plans = () => {
                     </div>
                 </div>
                 <div className="flex justify-between w-[400px] mx-auto mt-4">
-                    <div className="hover:text-marine-blue" onClick={() => {handleBillingOption(monthlyBilling)}}>Monthly</div>
+                    <div className="hover:text-marine-blue font-bold" onClick={() => {handleBillingOption(monthlyBilling)}}>Monthly</div>
                     <div></div>
-                    <div className="hover:text-marine-blue" onClick={() => {handleBillingOption(monthlyBilling)}}>Yearly</div>
+                    <div className="hover:text-marine-blue font-bold" onClick={() => {handleBillingOption(monthlyBilling)}}>Yearly</div>
                 </div>
               </div>
             <div className="self-end mt-8 md:mt-4">

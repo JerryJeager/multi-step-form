@@ -6,7 +6,6 @@ const Info = () => {
   const navigate = useNavigate()
   const onSubmit = data => {
     console.log(data)
-    navigate('Plans')
   };
 
 
@@ -43,7 +42,7 @@ const Info = () => {
           </form>
         </div>
         <div className="self-end mt-8 md:mt-4">
-          <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end">Next Step</button>
+          <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={() => navigate('Plans')}>Next Step</button>
         </div>
       </div>
 
