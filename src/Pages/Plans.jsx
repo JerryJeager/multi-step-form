@@ -6,9 +6,11 @@ const Plans = () => {
 
    const navigate = useNavigate()
    const [monthlyBilling, setMonthlyBilling] = useState(true)
+   const [isClicked, setIsClicked] = useState(false)
    const handleBillingOption = () =>{
-    setMonthlyBilling(preValue => !preValue)
+    setMonthlyBilling(!monthlyBilling)
    }
+
 
   return (
     <div className="mt-8 -translate-y-12 md:-translate-y-0 ">
@@ -17,7 +19,12 @@ const Plans = () => {
               <h2 className="text-3xl font-bold text-marine-blue">Select your plan</h2>
               <p className="text-cool-gray">You have the option of monthly or yearly billing.</p>
                 <div className="mt-4 flex flex-col md:flex-row md:justify-between gap-4">
-                    <div className="flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue hover:bg-light-gray p-4 w-[100%] md:w-[120px]">
+                    <div className={`flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue ${isClicked ? "bg-light-gray" : ""} cursor-pointer p-4 w-[100%] md:w-[120px]`} 
+                    onClick={() => {
+                        setIsClicked(true)
+                        monthlyBilling ? setChosenOption("Arcade(Monthly)") : setChosenOption("Arcade(Yearly")
+                        console.log(chosenOption)
+                    }}>
                         <div>
                             <img src="images/icon-arcade.svg" alt="" />
                         </div>
@@ -59,7 +66,8 @@ const Plans = () => {
                     <div className={`${monthlyBilling ? "text-cool-gray" : "text-marine-blue"}font-bold` } >Yearly</div>
                 </div>
               </div>
-            <div className="self-end mt-8 md:mt-4">
+            <div className="self-end mt-8 md:mt-4 flex w-full justify-between items-center">
+                <div className="text-cool-gray cursor-pointer" onClick={() => navigate(-1)}>Go Back</div>
                 <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={() => navigate('/Add-ons')}>Next Step</button>
             </div>
         </div>

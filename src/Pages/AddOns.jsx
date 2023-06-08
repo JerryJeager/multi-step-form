@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom';
 
 const AddOns = () => {
 
@@ -6,6 +7,8 @@ const AddOns = () => {
   const onSubmit = data => {
     console.log(data)
   };
+
+  const navigate = useNavigate()
 
   return (
     <div className="mt-8 -translate-y-12 md:-translate-y-0">
@@ -56,12 +59,16 @@ const AddOns = () => {
                     </div>
                   </div>
                   <div className="text-purplish-blue font-semibold">
-                    +$1/mo
+                    +$2/mo
                   </div>
                 </div>
 
               </form>
               <div></div>
+            </div>
+            <div className="self-end mt-8 md:mt-4 flex w-full justify-between items-center">
+                <div className="text-cool-gray cursor-pointer" onClick={() => navigate(-1)}>Go Back</div>
+                <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={() => navigate('/Summary')}>Next Step</button>
             </div>
         </div>
     </div>
