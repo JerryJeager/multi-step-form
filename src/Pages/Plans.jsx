@@ -6,10 +6,14 @@ const Plans = () => {
 
    const navigate = useNavigate()
    const [monthlyBilling, setMonthlyBilling] = useState(true)
-   const [isClicked, setIsClicked] = useState(false)
+   const [selectedPlan, setSelectedPlan] = useState({})
    const handleBillingOption = () =>{
-    setMonthlyBilling(!monthlyBilling)
+    setMonthlyBilling(preValue => !preValue)
    }
+
+    useEffect(() => {
+    console.log(selectedPlan);
+  }, [selectedPlan]);
 
 
   return (
@@ -19,12 +23,20 @@ const Plans = () => {
               <h2 className="text-3xl font-bold text-marine-blue">Select your plan</h2>
               <p className="text-cool-gray">You have the option of monthly or yearly billing.</p>
                 <div className="mt-4 flex flex-col md:flex-row md:justify-between gap-4">
-                    <div className={`flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue ${isClicked ? "bg-light-gray" : ""} cursor-pointer p-4 w-[100%] md:w-[120px]`} 
-                    onClick={() => {
-                        setIsClicked(true)
-                        monthlyBilling ? setChosenOption("Arcade(Monthly)") : setChosenOption("Arcade(Yearly")
-                        console.log(chosenOption)
-                    }}>
+                    <div className={`flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue hover:bg-light-gray cursor-pointer p-4 w-[100%] md:w-[120px]`} 
+                     onClick={() => {
+                        monthlyBilling ? setSelectedPlan({
+                            planName: "Arcade(Monthly)",
+                            costPerTime: "$9/mo",
+                            value: 9
+                        }) : setSelectedPlan({
+                            planName: "Arcade(Yearly)",
+                            costPerTime: "$90/yr",
+                            value: 90
+                        })
+                     }}
+                    
+                    >
                         <div>
                             <img src="images/icon-arcade.svg" alt="" />
                         </div>
@@ -35,7 +47,19 @@ const Plans = () => {
                             {!monthlyBilling && <p className="text-marine-blue">2 months free</p>}
                         </div>
                     </div>
-                    <div className="flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue hover:bg-light-gray p-4 w-[100%] md:w-[120px]">
+                    <div className="flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue hover:bg-light-gray p-4 w-[100%] md:w-[120px]"
+                      onClick={() => {
+                        monthlyBilling ? setSelectedPlan({
+                            planName: "Advanced(Monthly)",
+                            costPerTime: "$12/mo",
+                            value: 12
+                        }) : setSelectedPlan({
+                            planName: "Advanced(Yearly)",
+                            costPerTime: "$120/yr",
+                            value: 120
+                        })
+                     }}
+                    >
                         <div>
                             <img src="images/icon-advanced.svg" alt="" />
                         </div>
@@ -46,7 +70,19 @@ const Plans = () => {
                             {!monthlyBilling && <p className="text-marine-blue">2 months free</p>}
                         </div>
                     </div>
-                    <div className="flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue hover:bg-light-gray p-4 w-[100%] md:w-[120px]">
+                    <div className="flex flex-row md:flex-col gap-4 border-cool-gray border rounded-md hover:border-marine-blue hover:bg-light-gray p-4 w-[100%] md:w-[120px]"
+                       onClick={() => {
+                        monthlyBilling ? setSelectedPlan({
+                            planName: "Pro(Monthly)",
+                            costPerTime: "$15/mo",
+                            value: 15
+                        }) : setSelectedPlan({
+                            planName: "Pro(Yearly)",
+                            costPerTime: "$150/yr",
+                            value: 150
+                        })
+                     }}
+                    >
                         <div>
                             <img src="images/icon-pro.svg" alt="" />
                         </div>
@@ -60,7 +96,9 @@ const Plans = () => {
                 </div>
                 <div className="flex justify-between w-[210px] mx-auto mt-4">
                     <div className={`${monthlyBilling ? "text-marine-blue" : "text-cool-gray"} font-bold`}>Monthly</div>
-                    <div className="bg-marine-blue w-[50px] rounded-xl h-[25px] p-1 flex items-center cursor-pointer" onClick={() => {handleBillingOption(monthlyBilling)}}>
+                    <div className="bg-marine-blue w-[50px] rounded-xl h-[25px] p-1 flex items-center cursor-pointer" onClick={() => {
+                        handleBillingOption(monthlyBilling)
+                    }}>
                         <div className={`${!monthlyBilling ? "translate-x-6" : ""} transition duration-300 h-[15px] w-[15px] rounded-full bg-white `}></div>
                     </div>
                     <div className={`${monthlyBilling ? "text-cool-gray" : "text-marine-blue"}font-bold` } >Yearly</div>
@@ -68,7 +106,11 @@ const Plans = () => {
               </div>
             <div className="self-end mt-8 md:mt-4 flex w-full justify-between items-center">
                 <div className="text-cool-gray cursor-pointer" onClick={() => navigate(-1)}>Go Back</div>
-                <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={() => navigate('/Add-ons')}>Next Step</button>
+                <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={
+                    () => {
+                        Object.keys(selectedPlan).length !== 0 ? navigate(`/Add-ons?planName=${selectedPlan.planName}&costPerTime=${selectedPlan.costPerTime}&value=${selectedPlan.value}`) : alert("You have to select a Plan")
+                    }
+                }>Next Step</button>
             </div>
         </div>
         

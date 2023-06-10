@@ -1,7 +1,14 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 
 const AddOns = () => {
+
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+  const planName = queryParams.get("planName")
+  const costPerTime = queryParams.get("costPerTime")
+  const value = queryParams.get("value")
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => {
@@ -9,6 +16,12 @@ const AddOns = () => {
   };
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    console.log(planName)
+    console.log(costPerTime)
+    console.log(value)
+  }, [])
 
   return (
     <div className="mt-8 -translate-y-12 md:-translate-y-0">
