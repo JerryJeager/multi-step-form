@@ -63,7 +63,7 @@ const AddOns = () => {
                 <div className="w-[100%] p-2 rounded-md border border-cool-gray hover:border-purplish-blue flex items-center justify-between mt-2">
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <input type="checkbox" name="customizableProfile" id="" value="1" {...register("Online Service")} className="appearance-none h-5 w-5 border border-cool-gray rounded-sm checked:border-transparent checked:bg-purplish-blue cursor-pointer" />
+                      <input type="checkbox" name="customizableProfile" id="" value="3" {...register("Online Service")} className="appearance-none h-5 w-5 border border-cool-gray rounded-sm checked:border-transparent checked:bg-purplish-blue cursor-pointer" />
                       <img src="images/icon-checkmark.svg" alt="" className="absolute left-1 top-1" />
                     </div>
                     <div>
@@ -81,7 +81,10 @@ const AddOns = () => {
             </div>
             <div className="self-end mt-8 md:mt-4 flex w-full justify-between items-center">
                 <div className="text-cool-gray cursor-pointer" onClick={() => navigate(-1)}>Go Back</div>
-                <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={() => navigate('/Summary')}>Next Step</button>
+                <button type="submit" className="rounded-md p-2 bg-marine-blue hover:opacity-95 text-white w-[120px] mt-3 self-end" onClick={() => {
+                  onSubmit()
+                  // navigate('/Summary')
+                  }}>Next Step</button>
             </div>
         </div>
     </div>
